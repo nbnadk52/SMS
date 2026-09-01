@@ -1,0 +1,58 @@
+@SMS.Api_HostAddress = http://localhost:5017
+
+### Create a student
+POST {{SMS.Api_HostAddress}}/api/students
+Content-Type: application/json
+
+{
+  "firstName": "Ada",
+  "lastName": "Lovelace",
+  "email": "ada@example.com",
+  "dateOfBirth": "2000-05-20",
+  "phoneNumber": "9800000000"
+}
+
+### List all students
+GET {{SMS.Api_HostAddress}}/api/students
+Accept: application/json
+
+### Get a student by id (replace the id)
+GET {{SMS.Api_HostAddress}}/api/students/00000000-0000-0000-0000-000000000000
+Accept: application/json
+
+### Update a student (replace the id)
+PUT {{SMS.Api_HostAddress}}/api/students/00000000-0000-0000-0000-000000000000
+Content-Type: application/json
+
+{
+  "firstName": "Grace",
+  "lastName": "Hopper",
+  "email": "grace@example.com",
+  "dateOfBirth": "1999-01-02",
+  "phoneNumber": "9811111111"
+}
+
+### Delete a student (replace the id)
+DELETE {{SMS.Api_HostAddress}}/api/students/00000000-0000-0000-0000-000000000000
+
+### Duplicate email -> expects 409 Conflict
+POST {{SMS.Api_HostAddress}}/api/students
+Content-Type: application/json
+
+{
+  "firstName": "Ada",
+  "lastName": "Lovelace",
+  "email": "ada@example.com",
+  "dateOfBirth": "2000-05-20"
+}
+
+### Invalid payload -> expects 400 Bad Request
+POST {{SMS.Api_HostAddress}}/api/students
+Content-Type: application/json
+
+{
+  "firstName": "",
+  "lastName": "Lovelace",
+  "email": "blank@example.com",
+  "dateOfBirth": "2000-05-20"
+}
